@@ -27,12 +27,14 @@ def normalize_data(data_train, data_test):
     return data_train_norm, data_test_norm, mean, std
 
 
-def data_prep(data, gap = 0, max_lags=12):
+
+def data_prep(data, gap = 0, max_lags=12, min_date=None):
     """add lagged features as columns
     """
     
     # remove rows with NA date
     data.dropna(axis=0, subset=['date'], inplace=True)
+
     # set identifiers
     data.set_index(["date", "mun_code"], inplace=True)
 
@@ -46,11 +48,20 @@ def data_prep(data, gap = 0, max_lags=12):
     data_lags.reset_index(inplace=True)
     data_lags.sort_values("date", inplace=True)
 
+    # remove lag0 vars
+    data_lags.drop(data.columns[1:], axis=1, inplace=True)
+
+
     # remove rows with missing values
     data_lags.dropna(inplace=True)
     
+    # drop data before min_date
+    if min_date!=None:
+        data_lags = data_lags[data_lags.date>=min_date]
 
     return data_lags
+
+
 
 
 # --- errors ----

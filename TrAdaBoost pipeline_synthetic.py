@@ -8,48 +8,45 @@ from sklearn.ensemble import RandomForestRegressor
 from sklearn.metrics import mean_absolute_error, mean_squared_error
 
 
-
 from functions import run_pipeline_tradaboost
 
 
-### Transfer models using TrAdaBoost for synthetic data
-
 # read and prep the data
 
-datanames = os.listdir('simulated_data/horizons')
+datanames = os.listdir('simulated_data/')
 # remove our main dataset (which we use for transfer)
-datanames = [d for d in datanames if 'beta' in d]
+datanames = [d for d in datanames if 'train' in d]
 # separate the test sets
 testnames = [d for d in datanames if 'test' in d]
 # keep the remaining as train sets
 datanames = [d for d in datanames if d not in testnames]
 
 
-data0 = pd.read_csv('simulated_data/horizons/horizons_sird_waning-2021-11-14.csv')
-test0 = pd.read_csv('simulated_data/horizons/horizons_sird_waning-2021-11-14_test.csv')
+data0 = pd.read_csv('simulated_data/source.csv')
+test0 = pd.read_csv('simulated_data/source2.csv')
 
 # read train data
-data1 = pd.read_csv('simulated_data/horizons/'+datanames[0])
-data2 = pd.read_csv('simulated_data/horizons/'+datanames[1])
-data3 = pd.read_csv('simulated_data/horizons/'+datanames[2])
-data4 = pd.read_csv('simulated_data/horizons/'+datanames[3])
-data5 = pd.read_csv('simulated_data/horizons/'+datanames[4])
-data6 = pd.read_csv('simulated_data/horizons/'+datanames[5])
-data7 = pd.read_csv('simulated_data/horizons/'+datanames[6])
-data8 = pd.read_csv('simulated_data/horizons/'+datanames[7])
-data9 = pd.read_csv('simulated_data/horizons/'+datanames[8])
+data1 = pd.read_csv('simulated_data/'+datanames[0])
+data2 = pd.read_csv('simulated_data/'+datanames[1])
+data3 = pd.read_csv('simulated_data/'+datanames[2])
+data4 = pd.read_csv('simulated_data/'+datanames[3])
+data5 = pd.read_csv('simulated_data/'+datanames[4])
+data6 = pd.read_csv('simulated_data/'+datanames[5])
+data7 = pd.read_csv('simulated_data/'+datanames[6])
+data8 = pd.read_csv('simulated_data/'+datanames[7])
+data9 = pd.read_csv('simulated_data/'+datanames[8])
 
 
 # read test data
-test1 = pd.read_csv('simulated_data/horizons/'+testnames[0])
-test2 = pd.read_csv('simulated_data/horizons/'+testnames[1])
-test3 = pd.read_csv('simulated_data/horizons/'+testnames[2])
-test4 = pd.read_csv('simulated_data/horizons/'+testnames[3])
-test5 = pd.read_csv('simulated_data/horizons/'+testnames[4])
-test6 = pd.read_csv('simulated_data/horizons/'+testnames[5])
-test7 = pd.read_csv('simulated_data/horizons/'+testnames[6])
-test8 = pd.read_csv('simulated_data/horizons/'+testnames[7])
-test9 = pd.read_csv('simulated_data/horizons/'+testnames[8])
+test1 = pd.read_csv('simulated_data/'+testnames[0])
+test2 = pd.read_csv('simulated_data/'+testnames[1])
+test3 = pd.read_csv('simulated_data/'+testnames[2])
+test4 = pd.read_csv('simulated_data/'+testnames[3])
+test5 = pd.read_csv('simulated_data/'+testnames[4])
+test6 = pd.read_csv('simulated_data/'+testnames[5])
+test7 = pd.read_csv('simulated_data/'+testnames[6])
+test8 = pd.read_csv('simulated_data/'+testnames[7])
+test9 = pd.read_csv('simulated_data/'+testnames[8])
 
 
 # normalize

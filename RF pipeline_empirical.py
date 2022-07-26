@@ -14,16 +14,23 @@ from functions import normalize_data, prediction_horizons
 ###############################################################################
 
 # read data
-dengue_train_horizons = pd.read_csv('dengue_train_lags_horizons.csv')
-zika_test_horizons = pd.read_csv('zika_test_lags_horizons.csv')
-zika_train_horizons = pd.read_csv('zika_train_lags_horizons.csv')
+dengue_train = pd.read_csv('dengue_train.csv')
+zika_test = pd.read_csv('zika_test.csv')
+zika_train = pd.read_csv('zika_train.csv')
+
+flu_train = pd.read_csv('flu_train.csv')
+covid_test = pd.read_csv('covid_test.csv')
+covid_train = pd.read_csv('covid_train.csv')
 
 
 # randomly shuffle all the datasets
-dengue_train_horizons = dengue_train_horizons.sample(frac=1, random_state=12)
-zika_test_horizons = zika_test_horizons.sample(frac=1, random_state=12)
-zika_train_horizons = zika_train_horizons.sample(frac=1, random_state=12)
+dengue_train = dengue_train.sample(frac=1, random_state=12)
+zika_test = zika_test.sample(frac=1, random_state=12)
+zika_train = zika_train.sample(frac=1, random_state=12)
 
+flu_train = flu_train.sample(frac=1, random_state=12)
+covid_test = covid_test.sample(frac=1, random_state=12)
+covid_train = covid_train.sample(frac=1, random_state=12)
 
 
 ###############################################################################
@@ -46,7 +53,7 @@ pred_horizon2 = prediction_horizons(use_train=zika_train.copy(), use_test=zika_t
 
 
 # train on influenza, test on covid
-pred_horizon3 = prediction_horizons(use_train=flu.copy(), use_test=covid_test.copy(), 
+pred_horizon3 = prediction_horizons(use_train=flu_train.copy(), use_test=covid_test.copy(), 
                                     maxgap=10, min_date_train='2013-01-01', min_date_test='2020-03-28',
                                     lag=8)
 

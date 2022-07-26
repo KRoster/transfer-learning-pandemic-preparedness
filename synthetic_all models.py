@@ -24,7 +24,7 @@ from functions import data_prep, normalize_data, run_RF_transfer, run_transfer_m
 
 datanames = os.listdir('simulated_data/')
 # remove our main dataset (which we use for transfer)
-datanames = [d for d in datanames if 'beta' in d]
+datanames = [d for d in datanames if 'train' in d]
 # separate the test sets
 testnames = [d for d in datanames if 'test' in d]
 # keep the remaining as train sets
@@ -43,13 +43,10 @@ data7 = pd.read_csv('simulated_data/'+datanames[6])
 data8 = pd.read_csv('simulated_data/'+datanames[7])
 data9 = pd.read_csv('simulated_data/'+datanames[8])
 
-# change the feature names to match the context
-for d in [data0,data1,data2,data3,data4,data5,data6,data7,data8,data9]:
-    d.rename({'I_percap': 'cases', 'time':'date', 'id':'mun_code'}, axis=1, inplace=True)
     
 # -------------------------------------------------------------------------------------------   
 # read test data
-test0 = pd.read_csv('simulated_data/source_test.csv')
+test0 = pd.read_csv('simulated_data/source2.csv')
 test1 = pd.read_csv('simulated_data/'+testnames[0])
 test2 = pd.read_csv('simulated_data/'+testnames[1])
 test3 = pd.read_csv('simulated_data/'+testnames[2])

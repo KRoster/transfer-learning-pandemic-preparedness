@@ -23,9 +23,9 @@ from functions import normalize_data, run_transfer_models_lowdata, run_model2
 
 
 # read data
-dengue_train_horizons = pd.read_csv('dengue_train_lags_horizons.csv')
-zika_test_horizons = pd.read_csv('zika_test_lags_horizons.csv')
-zika_train_horizons = pd.read_csv('zika_train_lags_horizons.csv')
+dengue_train_horizons = pd.read_csv('dengue_train.csv')
+zika_test_horizons = pd.read_csv('zika_test.csv')
+zika_train_horizons = pd.read_csv('zika_train.csv')
 
 
 # normalize
@@ -38,7 +38,6 @@ train2_identifiers = zika_train_horizons.loc[:,['date','mun_code']].copy()
 ckpt_name='train_on_dengue_limiteddata'
 
 cutoff_dates = ['2016-05-27', '2016-06-24', '2016-07-22']
-
 
 
 
@@ -75,9 +74,9 @@ predictions_out['pred3_real'] = (predictions_out.pred3 * std_horizons['cases']) 
 
 
 # read data
-flu_train_horizons = pd.read_csv('flu_train_lags_horizons.csv', parse_dates=['date'])
-covid_test_horizons = pd.read_csv('covid_test_lags_horizons.csv', parse_dates=['date'])
-covid_train_horizons = pd.read_csv('covid_train_lags_horizons.csv', parse_dates=['date'])
+flu_train_horizons = pd.read_csv('flu_train.csv', parse_dates=['date'])
+covid_test_horizons = pd.read_csv('covid_test.csv', parse_dates=['date'])
+covid_train_horizons = pd.read_csv('covid_train.csv', parse_dates=['date'])
 
 # normalize
 flu_train_horizons_norm, covid_test_horizons_norm, mean_horizons_covid, std_horizons_covid  = normalize_data(flu_train_horizons.copy(), covid_test_horizons.copy())
@@ -110,9 +109,6 @@ predictions_out_covid['pred2_real'] = (predictions_out_covid.pred2 * std_horizon
 predictions_out_covid['pred3_real'] = (predictions_out_covid.pred3 * std_horizons_covid['cases']) + mean_horizons_covid['cases']
 
 
-
-
-# ## Relative errors (percentage of total number of cases in the city)
 
 
 # combine the predictions

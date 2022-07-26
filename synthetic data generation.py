@@ -58,4 +58,9 @@ for beta_new in [0.25, 0.3, 0.35]:
         data['zeta'] = zeta
         data['mu_i'] = mu_i
         
-        
+
+
+
+# save
+
+
